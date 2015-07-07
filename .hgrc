@@ -1,0 +1,33 @@
+[extensions]
+mq =
+eol = 
+fetch = 
+graphlog = 
+transplant = 
+reviewboard = ~/.hgext/hgreviewboard
+mercurial_keyring =
+hgshelve = ~/.hgext/hgshelve/hgshelve.py
+convert =
+
+[paths]
+repo = https://jcurtis@repo.evoworx.org/
+
+[reviewboard]
+server = https://reviews.evoworx.org
+user = jcurtis
+target_groups = quantify
+
+
+[ui]
+username = Jason Curtis <jcurtis@energysavvy.com>
+merge = meld
+
+[auth]
+repo.schemes = http https
+repo.prefix = repo.evoworx.org
+repo.username = jcurtis
+
+
+[tortoisehg]
+editor = sublime
+

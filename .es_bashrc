@@ -1,0 +1,21 @@
+# ~/.es_bashrc: Useful shortcuts for an EnergySavvy dev stack
+
+alias cd..='cd ..'
+alias bashrc='gedit ~/.bashrc &'
+alias esrc='gedit ~/.es_bashrc &'
+
+# You'll have to be inside a repository for this to work
+# If there are no changes pulled, this will abort and you'll have to hg push manually.
+alias syncem="hg fetch && hg push"
+
+# These depend on the location of your energysavvy directory:
+alias es='cd ~/workspace/energysavvy/'
+alias mainrepo='cd ~/workspace/energysavvy/mainrepo'
+alias killpycs='find ~/workspace/energysavvy -name \*.pyc -delete'
+
+# Registers your ssh key so you only have to type the passphrase once per login
+sshkey() {
+  eval `ssh-agent -s`
+  ssh-add ~/.ssh/id_rsa
+}
+
