@@ -1,5 +1,5 @@
 
-alias pl='cd ~/workspace/energysavvy/quantify-pipeline/quantify-pipeline/'
+alias pl='cd ~/energysavvy/quantify-pipeline/quantify-pipeline/'
 
 # Tox-env
 alias te='source .tox/py27/bin/activate'
@@ -7,6 +7,11 @@ alias te='source .tox/py27/bin/activate'
 alias sc='starcluster -c ~/workspace/energysavvy/evaluate-pipeline/decoupled-pipeline/starcluster-config'
 
 alias mon="xrandr --output LVDS1 --off;sleep 1;xrandr --output LVDS1 --auto;sleep 1;xrandr --output DP-1 --right-of LVDS1;xrandr --output DP-2 --right-of DP-1"
+alias project="xrandr --output HDMI1 --auto; xrandr --output HDMI1 --same-as eDP1"
+alias mainscreenturnon="xrandr --output HDMI1 --auto; xrandr --output HDMI1 --same-as eDP1"
+
+alias instancekill="list-instances | grep quantify | petl \"fromtext().capture('lines', '([^ ]*) *(i-[^ ]*) *', ['n','i']).rowmap(lambda row: ['terminate-instance -n {} -i {}'.format(row.n, row.i)], header=['command'], failonerror=True).tocsv()\""
+alias volkill="list-volumes | grep quantify | petl \"fromtext().capture('lines', '(quantify-pipeline-[^ ]*) *(vol-[^ ]*) (.*)', ['n','v','s']).rowmap(lambda row: ['delete-ebs-volume -n {} -v {} -s {}'.format(row.n, row.v, row.s)], header=['command'], failonerror=True).tocsv()\""
 
 # e.g. tests --site=njng
 tests() {
@@ -16,10 +21,6 @@ tests() {
 flake() {
   time ddjango flake8 --exclude=migrations --config=/vagrant/mainrepo/infra/flake8-config/flake8 /vagrant/mainrepo
 }
-
-# Starts a new screen on the NVIDIA card (I think) piped to an output on the NVIDIA card (or something like that). "sudo service bumblebeed restart" might also be necessary.
-alias onscreen="optirun true && xrandr --output LVDS1 --auto --output VIRTUAL --mode 1600x1200 --rotate normal --right-of VGA1 && screenclone -d :8 -x 2 &"
-alias mainscreenturnon=onscreen
 
 codetime() {
   mainscreenturnon
@@ -37,11 +38,3 @@ prod_log() {
   echo ${target}
   cd ${target}
 }
-
-# gitprompt configuration
-
-# Set config variables first
-GIT_PROMPT_ONLY_IN_REPO=1
-
-# as last entry source the gitprompt script
-source ~/.bash-git-prompt/gitprompt.sh

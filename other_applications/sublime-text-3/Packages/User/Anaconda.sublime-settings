@@ -1,0 +1,11 @@
+{
+    "auto_upgrade": false,
+    "anaconda_linting": true,
+    "anaconda_linter_mark_style": "none",
+    "anaconda_linter_delay": 1,
+    "anaconda_gutter_theme": "bright",
+    "pep8_ignore":
+    [
+        "E501"
+    ]
+}

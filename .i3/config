@@ -150,6 +150,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        tray_output eDP1
 }
 
 
@@ -159,7 +160,7 @@ bar {
 #workspace 3 output DP-2
 
 #assign [class="^jetbrains-pycharm$"] → 2
-exec_always xrandr --output DP-2 --rotate left
+exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
 
 # Shortcuts
